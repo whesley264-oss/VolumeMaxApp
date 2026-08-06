@@ -1,0 +1,100 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.volumemax.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:5:5-78
+11-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+12-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:6:5-73
+12-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:6:22-70
+13
+14    <permission
+14-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+15        android:name="com.volumemax.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+15-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+16        android:protectionLevel="signature" />
+16-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+17
+18    <uses-permission android:name="com.volumemax.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+18-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+18-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+19
+20    <application
+20-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:8:5-31:19
+21        android:allowBackup="true"
+21-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:9:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.9.0] /home/openhands/.gradle/caches/transforms-3/8222cb7143ba57e62d848e6565915cfd/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+23        android:debuggable="true"
+24        android:extractNativeLibs="false"
+25        android:icon="@mipmap/ic_launcher"
+25-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:10:9-43
+26        android:label="@string/app_name"
+26-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:11:9-41
+27        android:roundIcon="@mipmap/ic_launcher_round"
+27-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:12:9-54
+28        android:supportsRtl="true"
+28-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:13:9-35
+29        android:theme="@style/Theme.VolumeMaxApp" >
+29-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:14:9-50
+30        <activity
+30-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:17:9-29:20
+31            android:name="com.volumemax.app.MainActivity"
+31-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:18:13-41
+32            android:excludeFromRecents="true"
+32-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:21:13-46
+33            android:exported="true"
+33-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:19:13-36
+34            android:launchMode="singleInstance"
+34-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:20:13-48
+35            android:taskAffinity="" >
+35-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:22:13-36
+36            <intent-filter>
+36-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:23:13-28:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:24:17-69
+37-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:24:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:25:17-77
+39-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:25:27-74
+40                <category android:name="android.intent.category.HOME" />
+40-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:26:17-73
+40-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:26:27-70
+41                <category android:name="android.intent.category.DEFAULT" />
+41-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:27:17-76
+41-->/workspace/project/VolumeMaxApp/app/src/main/AndroidManifest.xml:27:27-73
+42            </intent-filter>
+43        </activity>
+44
+45        <provider
+45-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+46            android:name="androidx.startup.InitializationProvider"
+46-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+47            android:authorities="com.volumemax.app.androidx-startup"
+47-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+48            android:exported="false" >
+48-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+49            <meta-data
+49-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+50                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+50-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+51                android:value="androidx.startup" />
+51-->[androidx.emoji2:emoji2:1.2.0] /home/openhands/.gradle/caches/transforms-3/cd9429c185a437c1c2680426049eb8fb/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+52            <meta-data
+52-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/openhands/.gradle/caches/transforms-3/1799c573ad4805bad8c8f240a170e137/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+53                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+53-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/openhands/.gradle/caches/transforms-3/1799c573ad4805bad8c8f240a170e137/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+54                android:value="androidx.startup" />
+54-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/openhands/.gradle/caches/transforms-3/1799c573ad4805bad8c8f240a170e137/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+55        </provider>
+56    </application>
+57
+58</manifest>
