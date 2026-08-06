@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.ffpanel.tool.R;
-
 import java.io.IOException;
 
 public class MainActivity extends Activity {
@@ -37,15 +35,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        hideSystemUI();
-        setContentView(R.layout.activity_main);
-
-        volumeText = findViewById(R.id.volumeText);
-        audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-        maximizeVolume();
-        playAudio();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        try {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            setContentView(R.layout.activity_main);
+            volumeText = findViewById(R.id.volumeText);
+            audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+            maximizeVolume();
+            hideSystemUI();
+            playAudio();
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            if (volumeText != null) {
+                volumeText.setText("♪ MAX VOLUME ♪");
+            }
+        } catch (Exception e) {
+            // Show error
+        }
     }
 
     private void playAudio() {
@@ -53,69 +57,66 @@ public class MainActivity extends Activity {
             int resId = getResources().getIdentifier("audio", "raw", getPackageName());
             if (resId != 0) {
                 mediaPlayer = MediaPlayer.create(this, resId);
-                if (mediaPlayer != null) {
-                    mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .build());
-                    mediaPlayer.setLooping(true);
-                    mediaPlayer.start();
-                    volumeText.setText("♪ MAX VOLUME ♪");
-                }
-            } else {
+            }
+            if (mediaPlayer == null) {
                 playFromAsset();
+            }
+            if (mediaPlayer != null) {
+                mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .build());
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
             }
         } catch (Exception e) {
-            try {
-                playFromAsset();
-            } catch (Exception e2) {
-                volumeText.setText("ERROR LOADING AUDIO");
-            }
+            // Audio failed - not critical
         }
     }
 
     private void playFromAsset() {
         try {
+            android.content.res.AssetFileDescriptor afd = getAssets().openFd("audio/gemido-whatsapp.mp3");
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(getAssets().openFd("audio/gemido-whatsapp.mp3"));
-            mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .setUsage(AudioAttributes.USAGE_MEDIA)
-                .build());
-            mediaPlayer.setLooping(true);
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            afd.close();
             mediaPlayer.prepare();
-            mediaPlayer.start();
-            volumeText.setText("♪ MAX VOLUME ♪");
         } catch (IOException e) {
-            volumeText.setText("AUDIO NOT FOUND");
+            mediaPlayer = null;
         }
     }
 
     private void hideSystemUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            getWindow().setDecorFitsSystemWindows(false);
-            getWindow().getInsetsController().hide(android.view.WindowInsets.Type.statusBars() | android.view.WindowInsets.Type.navigationBars());
-        } else {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                getWindow().setDecorFitsSystemWindows(false);
+                getWindow().getInsetsController().hide(android.view.WindowInsets.Type.statusBars() | android.view.WindowInsets.Type.navigationBars());
+            } else {
+                View decorView = getWindow().getDecorView();
+                decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
+            }
+        } catch (Exception e) {
+            // Ignore
         }
     }
 
     private void maximizeVolume() {
         try {
-            audioManager.setStreamVolume(
-                AudioManager.STREAM_MUSIC,
-                audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                0
-            );
+            if (audioManager != null) {
+                audioManager.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                    0
+                );
+            }
         } catch (Exception e) {
-            // Silently fail
+            // Ignore
         }
     }
 
@@ -135,6 +136,7 @@ public class MainActivity extends Activity {
         return super.dispatchKeyEvent(event);
     }
 
+    @Deprecated
     @Override
     public void onBackPressed() {
         return;
@@ -158,20 +160,28 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        hideSystemUI();
-        maximizeVolume();
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
+        try {
+            hideSystemUI();
+            maximizeVolume();
+            if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+                mediaPlayer.start();
+            }
+        } catch (Exception e) {
+            // Ignore
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
+        try {
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+        } catch (Exception e) {
+            // Ignore
         }
     }
 }
