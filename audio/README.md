@@ -2,14 +2,11 @@
 
 Coloque seu arquivo de áudio aqui!
 
-## Formatos suportados:
-- `.mp3` (recomendado)
-- `.wav`
-- `.ogg`
+## Arquivo:
+- `gemido-whatsapp.mp3`
 
 ## Como usar:
-1. Renomeie seu arquivo de áudio para `audio.mp3`
-2. Coloque o arquivo na pasta `app/src/main/assets/audio/`
-3. Recompile o app
+1. Coloque o arquivo `gemido-whatsapp.mp3` na pasta `app/src/main/assets/audio/`
+2. Recompile o app
 
 O áudio tocará automaticamente em loop quando o app for aberto.

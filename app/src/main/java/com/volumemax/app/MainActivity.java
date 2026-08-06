@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
     private void playFromAsset() {
         try {
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(getAssets().openFd("audio/audio.mp3"));
+            mediaPlayer.setDataSource(getAssets().openFd("audio/gemido-whatsapp.mp3"));
             mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
             mediaPlayer.start();
             volumeText.setText("🎵 Volume Máximo - Tocando! 🎵");
         } catch (IOException e) {
-            volumeText.setText("Coloque audio.mp3 em app/src/main/assets/audio/");
+            volumeText.setText("Coloque gemido-whatsapp.mp3 em app/src/main/assets/audio/");
         }
     }
 
