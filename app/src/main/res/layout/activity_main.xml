@@ -5,34 +5,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#0D0D0D"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/volumeText"
+        android:id="@+id/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🎵 Volume Máximo! 🎵"
-        android:textColor="#00FF00"
-        android:textSize="48sp"
+        android:layout_marginTop="40dp"
+        android:text="⚡ PAINEL FREESTYLE ⚡"
+        android:textColor="#FF6600"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/subHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="v2.0 HACKED EDITION"
+        android:textColor="#FFD700"
+        android:textSize="14sp"
+        android:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerText" />
+
+    <LinearLayout
+        android:id="@+id/statusPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#1A1A1A"
+        app:layout_constraintTop_toBottomOf="@id/subHeader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[ SYSTEM STATUS ]"
+            android:textColor="#00FF00"
+            android:textSize="16sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="● AIMBOT: ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● SPEED HACK: ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● FLY HACK: ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● NO RECOIL: ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● ANTENNA: ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/volumeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="♪ MAX VOLUME ♪"
+        android:textColor="#00FF00"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusPanel" />
+
+    <TextView
         android:id="@+id/infoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="O volume está no máximo\nToque na tela para maximizar\nNão é possível sair do app"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:text="AUDIO OUTPUT: OPTIMIZED"
+        android:textColor="#FFD700"
+        android:textSize="14sp"
         android:gravity="center"
+        android:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/volumeText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="www.painel-freestyle.com"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:fontFamily="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
